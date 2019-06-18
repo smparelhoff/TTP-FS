@@ -16,6 +16,16 @@ const User = db.define('user', {
       return () => this.getDataValue('password')
     }
   },
+  balance: {
+    type: Sequelize.INTEGER,
+    defaultValue: 500000,
+    get() {
+      return this.getDataValue('balance') / 100
+    },
+    set(valueToBeSet) {
+      this.setDataValue('balance', valueToBeSet * 100)
+    }
+  },
   salt: {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.

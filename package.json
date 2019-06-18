@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "ttp2",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "TTP-2: Project for Spotify Fellowship",
   "engines": {
     "node": ">= 7.0.0"
   },
