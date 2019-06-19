@@ -13,7 +13,7 @@ export const UserHome = props => {
     <div>
       <h3>
         Welcome, {name}! Your current balance is ${balance}
-      </h3>
+    </h3>
       <Portfolio />
     </div>
   )
