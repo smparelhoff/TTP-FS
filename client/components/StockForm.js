@@ -1,6 +1,6 @@
 import React from 'react'
 
-class StockLookup extends React.Component {
+export default class StockLookup extends React.Component {
   constructor() {
     super()
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Portfolio} from './index'
+import {Portfolio, StockForm} from './index'
 
 /**
  * COMPONENT
@@ -13,8 +13,9 @@ export const UserHome = props => {
     <div>
       <h3>
         Welcome, {name}! Your current balance is ${balance}
-    </h3>
+      </h3>
       <Portfolio />
+      <StockForm />
     </div>
   )
 }
