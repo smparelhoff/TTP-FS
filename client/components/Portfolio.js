@@ -13,7 +13,7 @@ class Portfolio extends React.Component {
       this.props.portfolio.map(stock => {
         return (
           <div key={stock.ticker}>
-            {stock.ticker} - {stock.price} - {stock.shares}
+            {stock.ticker} - {stock.price / 1000} - {stock.shares}
           </div>
         )
       })
