@@ -38,7 +38,7 @@
       "git add"
     ]
   },
-  "author": "Fullstack Academy of Code",
+  "author": "Sara Parelhoff",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
