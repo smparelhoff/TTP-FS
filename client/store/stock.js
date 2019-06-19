@@ -4,10 +4,7 @@ import axios from 'axios'
 const GET_STOCK = 'GET_STOCK'
 
 //Action Creators
-const getStock = stock => ({
-  type: GET_STOCK,
-  stock
-})
+const getStock = stock => ({type: GET_STOCK, stock})
 
 //Thunks
 export const checkStock = symbol => async dispatch => {
