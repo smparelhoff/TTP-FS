@@ -8,18 +8,16 @@ const Trade = db.define('trade', {
   },
   price: {
     type: Sequelize.INTEGER,
-    allowNull: false,
-    get() {
-      return this.getDataValue('price' / 100)
-    },
-    set(valueToBeSet) {
-      this.setDataValue('price', valueToBeSet * 100)
-    }
+    allowNull: false
   },
   shares: {
     type: Sequelize.INTEGER,
     allowNull: false
   }
+})
+
+Trade.beforeValidate(tradeInstance => {
+  tradeInstance.price = parseInt(tradeInstance.price * 1000, 10)
 })
 
 module.exports = Trade
