@@ -19,8 +19,7 @@ export const fetchPortfolio = () => async dispatch => {
 }
 
 export const postStock = stock => async dispatch => {
-  const [stockData] = stock
-  const {data} = await axios.post('/api/portfolio', stockData)
+  const {data} = await axios.post('/api/portfolio', stock)
   dispatch(addStock(data))
 }
 

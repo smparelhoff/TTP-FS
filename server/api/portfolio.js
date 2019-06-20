@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const {symbol, price, shares} = req.body.stock
+    const {symbol, price, shares} = req.body
     const addStock = await Trade.create({symbol, price, shares})
     res.json(addStock)
   } catch (err) {

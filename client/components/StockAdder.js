@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import StockLookupForm from './StockLookupForm'
+import {postStock} from '../store/portfolio'
 
 class StockAdder extends React.Component {
   constructor() {
@@ -11,10 +12,23 @@ class StockAdder extends React.Component {
       error: false
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleBuy = this.handleBuy.bind(this)
   }
 
   componentDidMount() {
     this.setState({balance: this.props.balance})
+  }
+
+  handleBuy() {
+    const stock = this.props.stock[0]
+    const postData = {
+      symbol: stock.symbol,
+      price: stock.price,
+      shares: this.state.shares
+    }
+    console.log(postData)
+    this.props.addStock(postData)
+    this.setState({balance: this.props.balance, shares: 0, error: false})
   }
 
   handleChange(evt) {
@@ -22,7 +36,7 @@ class StockAdder extends React.Component {
     const price = this.props.stock[0].price * evt.target.value
 
     if (balance - price < 0) {
-      this.setState({error: true, shares: evt.target.value})
+      this.setState({error: true})
     } else {
       this.setState({
         balance: balance - price,
@@ -54,7 +68,8 @@ class StockAdder extends React.Component {
                 onChange={this.handleChange}
               />
               ARE WE ERRORING?{' '}
-              {this.state.error && <div>Sorry, you can't afford this many</div>}
+              {this.state.error && <div>Sorry, you can't afford any more!</div>}
+              <input type="button" value="Buy" onClick={this.handleBuy} />
             </h4>
           </div>
         )}
@@ -69,7 +84,9 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  handleAdd() {}
+  addStock(postData) {
+    dispatch(postStock(postData))
+  }
 })
 
 export default connect(mapState, mapDispatch)(StockAdder)

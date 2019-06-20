@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Trade = db.define('trade', {
-  ticker: {
+  symbol: {
     type: Sequelize.STRING,
     allowNull: false
   },
