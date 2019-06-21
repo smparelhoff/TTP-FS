@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import StockLookupForm from './StockLookupForm'
+import {StockLookupForm, StockBuyForm} from './index'
 import {postStock} from '../store/portfolio'
 import {postBalance} from '../store/user'
 import {removeStock} from '../store/stock'
@@ -34,7 +34,7 @@ class StockAdder extends React.Component {
       .then(tradeID => {
         return this.props.updateBalance(tradeID)
       })
-      .then(balanceUpdated => {
+      .then(() => {
         this.props.clearStock()
         this.setState({
           balance: this.props.balance / 100,
@@ -72,23 +72,13 @@ class StockAdder extends React.Component {
         {!stock.symbol ? (
           <StockLookupForm />
         ) : (
-          <div>
-            <h4>Symbol: {stock.symbol}</h4>
-            <h4>Last Price: {stock.price.toFixed(3)}</h4>
-            <h4>
-              Buy Shares:
-              <input
-                type="number"
-                name="shares"
-                min="0"
-                value={shares}
-                onChange={this.handleChange}
-              />
-              ARE WE ERRORING?{' '}
-              {this.state.error && <div>Sorry, you can't afford any more!</div>}
-              <input type="button" value="Buy" onClick={this.handleBuy} />
-            </h4>
-          </div>
+          <StockBuyForm
+            stock={stock}
+            shares={shares}
+            handleChange={this.handleChange}
+            error={this.state.error}
+            handleBuy={this.handleBuy}
+          />
         )}
       </div>
     )
