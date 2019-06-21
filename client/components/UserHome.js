@@ -1,20 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Portfolio} from './index'
+import {Portfolio, StockAdder} from './index'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
-  const {name, balance} = props
+  const {name} = props
 
   return (
     <div>
-      <h3>
-        Welcome, {name}! Your current balance is ${balance}
-    </h3>
+      <h3>Welcome, {name}!</h3>
       <Portfolio />
+      <StockAdder />
     </div>
   )
 }
@@ -24,8 +23,6 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email,
-    balance: state.user.balance,
     name: state.user.firstname
   }
 }
@@ -36,5 +33,5 @@ export default connect(mapState)(UserHome)
  * PROP TYPES
  */
 UserHome.propTypes = {
-  email: PropTypes.string
+  name: PropTypes.string
 }

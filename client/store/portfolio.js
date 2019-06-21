@@ -2,9 +2,11 @@ import axios from 'axios'
 
 //Action constants
 const GET_PORTFOLIO = 'GET_PORTFOLIO'
+const ADD_STOCK = 'ADD_STOCK'
 
 //Action creators
 const getPortfolio = portfolio => ({type: GET_PORTFOLIO, portfolio})
+const addStock = stock => ({type: ADD_STOCK, stock})
 
 //Thunks
 export const fetchPortfolio = () => async dispatch => {
@@ -16,15 +18,22 @@ export const fetchPortfolio = () => async dispatch => {
   }
 }
 
+export const postStock = stock => async dispatch => {
+  const {data} = await axios.post('/api/portfolio', stock)
+  dispatch(addStock(data))
+  return data.id
+}
+
 //Initial State
 const initialState = []
 
 //Reducer
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_PORTFOLIO: {
+    case GET_PORTFOLIO:
       return action.portfolio
-    }
+    case ADD_STOCK:
+      return [...state, action.stock]
     default:
       return state
   }

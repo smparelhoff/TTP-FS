@@ -24,13 +24,7 @@ const User = db.define('user', {
   },
   balance: {
     type: Sequelize.INTEGER,
-    defaultValue: 500000,
-    get() {
-      return this.getDataValue('balance') / 100
-    },
-    set(valueToBeSet) {
-      this.setDataValue('balance', valueToBeSet * 100)
-    }
+    defaultValue: 500000
   },
   salt: {
     type: Sequelize.STRING,

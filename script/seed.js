@@ -27,19 +27,19 @@ async function seed() {
 
   await Promise.all([
     Trade.create({
-      ticker: 'AMD',
+      symbol: 'AMD',
       price: 30.555,
       shares: 100,
       userId: codyId
     }),
     Trade.create({
-      ticker: 'GE',
+      symbol: 'GE',
       price: 10.445,
       shares: 70,
       userId: codyId
     }),
     Trade.create({
-      ticker: 'CHK',
+      symbol: 'CHK',
       price: 1.855,
       shares: 95,
       userId: codyId
