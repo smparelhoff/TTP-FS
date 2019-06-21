@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import StockLookupForm from './StockLookupForm'
 import {postStock} from '../store/portfolio'
+import {postBalance} from '../store/user'
 
 class StockAdder extends React.Component {
   constructor() {
@@ -16,24 +17,30 @@ class StockAdder extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({balance: this.props.balance})
+    this.setState({balance: parseFloat(this.props.balance / 100).toFixed(2)})
   }
 
-  handleBuy() {
+  async handleBuy() {
     const stock = this.props.stock[0]
     const postData = {
       symbol: stock.symbol,
       price: stock.price,
       shares: this.state.shares
     }
-    console.log(postData)
-    this.props.addStock(postData)
+    const balance = {balance: parseInt(this.state.balance * 100, 10)}
+    console.log('BALANCE IN STOCKADDER:', balance)
+
+    await this.props.addStock(postData)
+    await this.props.updateBalance(balance)
+
     this.setState({balance: this.props.balance, shares: 0, error: false})
   }
 
   handleChange(evt) {
-    const {balance} = this.props
+    let {balance} = this.props
     const price = this.props.stock[0].price * evt.target.value
+
+    balance = parseFloat(balance / 100).toFixed(2)
 
     if (balance - price < 0) {
       this.setState({error: true})
@@ -47,8 +54,10 @@ class StockAdder extends React.Component {
   }
 
   render() {
+    console.log(this.state.balance)
     const {stock} = this.props
-    const {balance, shares} = this.state
+    let {balance, shares} = this.state
+    balance = parseFloat(balance).toFixed(2)
     return (
       <div>
         <h4>Current balance: ${balance}</h4>
@@ -86,6 +95,9 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   addStock(postData) {
     dispatch(postStock(postData))
+  },
+  updateBalance(balance) {
+    dispatch(postBalance(balance))
   }
 })
 
