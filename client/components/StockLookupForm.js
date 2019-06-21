@@ -2,10 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {checkStock} from '../store/stock'
 
-const StockLookupForm = ({handleSubmit, handleAdd, stock}) => {
+const StockLookupForm = ({handleSubmit, stock}) => {
   return (
     <div>
-      <form onSubmit={!stock.length ? handleSubmit : handleAdd}>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="Ticker Symbol">Ticker Symbol</label>
           <input name="symbol" type="text" />
@@ -24,7 +24,7 @@ const StockLookupForm = ({handleSubmit, handleAdd, stock}) => {
 }
 
 const mapState = state => ({
-  stock: state.stock || []
+  stock: state.stock || {}
 })
 
 const mapDispatch = dispatch => ({
