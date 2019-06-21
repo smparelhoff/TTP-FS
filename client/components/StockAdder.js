@@ -31,11 +31,9 @@ class StockAdder extends React.Component {
     this.props
       .addStock(postData)
       .then(tradeID => {
-        console.log({tradeID})
         return this.props.updateBalance(tradeID)
       })
-      .then(promise => {
-        console.log('ABOUT TO RESET BALANCE:', this.props.balance)
+      .then(balanceUpdated => {
         this.setState({
           balance: this.props.balance / 100,
           shares: 0,
@@ -52,8 +50,6 @@ class StockAdder extends React.Component {
     const price = this.props.stock.price * evt.target.value
     const newBalance = balance / 100 - price
 
-    console.log({balance: balance / 100, price, newBalance})
-
     if (newBalance < 0) {
       this.setState({error: true})
     } else {
@@ -66,7 +62,6 @@ class StockAdder extends React.Component {
   }
 
   render() {
-    console.log({balance: this.state.balance, type: typeof this.state.balance})
     const {stock} = this.props
     let {balance, shares} = this.state
     return (
