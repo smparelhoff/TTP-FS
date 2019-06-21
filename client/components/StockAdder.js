@@ -17,36 +17,48 @@ class StockAdder extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({balance: parseFloat(this.props.balance / 100).toFixed(2)})
+    this.setState({balance: parseFloat((this.props.balance / 100).toFixed(2))})
   }
 
-  async handleBuy() {
-    const stock = this.props.stock[0]
+  handleBuy() {
+    const {stock} = this.props
     const postData = {
       symbol: stock.symbol,
       price: stock.price,
       shares: this.state.shares
     }
-    const balance = {balance: parseInt(this.state.balance * 100, 10)}
-    console.log('BALANCE IN STOCKADDER:', balance)
 
-    await this.props.addStock(postData)
-    await this.props.updateBalance(balance)
-
-    this.setState({balance: this.props.balance, shares: 0, error: false})
+    this.props
+      .addStock(postData)
+      .then(tradeID => {
+        console.log({tradeID})
+        return this.props.updateBalance(tradeID)
+      })
+      .then(promise => {
+        console.log('ABOUT TO RESET BALANCE:', this.props.balance)
+        this.setState({
+          balance: this.props.balance / 100,
+          shares: 0,
+          error: false
+        })
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 
   handleChange(evt) {
     let {balance} = this.props
-    const price = this.props.stock[0].price * evt.target.value
+    const price = this.props.stock.price * evt.target.value
+    const newBalance = balance / 100 - price
 
-    balance = parseFloat(balance / 100).toFixed(2)
+    console.log({balance: balance / 100, price, newBalance})
 
-    if (balance - price < 0) {
+    if (newBalance < 0) {
       this.setState({error: true})
     } else {
       this.setState({
-        balance: balance - price,
+        balance: newBalance,
         shares: evt.target.value,
         error: false
       })
@@ -54,19 +66,18 @@ class StockAdder extends React.Component {
   }
 
   render() {
-    console.log(this.state.balance)
+    console.log({balance: this.state.balance, type: typeof this.state.balance})
     const {stock} = this.props
     let {balance, shares} = this.state
-    balance = parseFloat(balance).toFixed(2)
     return (
       <div>
-        <h4>Current balance: ${balance}</h4>
-        {!stock.length ? (
+        <h4>Current balance: ${balance.toFixed(2)}</h4>
+        {!stock.symbol ? (
           <StockLookupForm />
         ) : (
           <div>
-            <h4>Symbol: {stock[0].symbol}</h4>
-            <h4>Last Price: {stock[0].price}</h4>
+            <h4>Symbol: {stock.symbol}</h4>
+            <h4>Last Price: {stock.price.toFixed(3)}</h4>
             <h4>
               Buy Shares:
               <input
@@ -88,16 +99,18 @@ class StockAdder extends React.Component {
 }
 
 const mapState = state => ({
-  stock: state.stock || [],
+  stock: state.stock || {},
   balance: state.user.balance
 })
 
 const mapDispatch = dispatch => ({
   addStock(postData) {
-    dispatch(postStock(postData))
+    const id = dispatch(postStock(postData))
+    return id
   },
-  updateBalance(balance) {
-    dispatch(postBalance(balance))
+  updateBalance(tradeID) {
+    const balance = dispatch(postBalance(tradeID))
+    return balance
   }
 })
 

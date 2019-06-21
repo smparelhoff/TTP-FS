@@ -10,8 +10,8 @@ const StockLookupForm = ({handleSubmit, handleAdd, stock}) => {
           <label htmlFor="Ticker Symbol">Ticker Symbol</label>
           <input name="symbol" type="text" />
         </div>
-        {!stock.length && <input type="submit" value="Check Price" />}
-        {stock.length && (
+        {!stock.symbol && <input type="submit" value="Check Price" />}
+        {stock.symbol && (
           <div>
             <label htmlFor="Shares">Shares</label>
             <input name="shares" type="number" />
@@ -30,12 +30,7 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   handleSubmit(evt) {
     evt.preventDefault()
-    console.log(evt.target.symbol.value)
     dispatch(checkStock(evt.target.symbol.value))
-  },
-  handleAdd(evt) {
-    evt.preventDefault()
-    console.log(evt.target.shares.value, evt.target.symbol.value)
   }
 })
 

@@ -21,6 +21,7 @@ export const fetchPortfolio = () => async dispatch => {
 export const postStock = stock => async dispatch => {
   const {data} = await axios.post('/api/portfolio', stock)
   dispatch(addStock(data))
+  return data.id
 }
 
 //Initial State

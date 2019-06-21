@@ -25,11 +25,10 @@ const updateBalance = balance => ({type: UPDATE_BALANCE, balance})
  */
 
 //TD rethink this thunk--should be the amount to subtract from user's balance
-export const postBalance = balance => async dispatch => {
+export const postBalance = tradeId => async dispatch => {
   try {
-    console.log('BALANCE IN THUNK: ', balance)
-    const {data} = await axios.put('/api/user', balance)
-    dispatch(updateBalance(data))
+    const {data} = await axios.put('/api/user', {tradeId})
+    dispatch(updateBalance(data.balance))
   } catch (err) {
     console.error(err)
   }

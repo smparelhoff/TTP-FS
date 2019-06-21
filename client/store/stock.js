@@ -11,10 +11,10 @@ export const checkStock = symbol => async dispatch => {
   const {data} = await axios.get(
     `https://api.iextrading.com/1.0/tops/last?symbols=${symbol}`
   )
-  dispatch(getStock(data))
+  dispatch(getStock(data[0]))
 }
 
-const initialState = []
+const initialState = {}
 
 //Reducer
 export default function(state = initialState, action) {

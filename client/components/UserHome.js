@@ -7,7 +7,7 @@ import {Portfolio, StockAdder} from './index'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {name, balance} = props
+  const {name} = props
 
   return (
     <div>
@@ -23,8 +23,6 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email,
-    balance: state.user.balance,
     name: state.user.firstname
   }
 }
@@ -35,5 +33,5 @@ export default connect(mapState)(UserHome)
  * PROP TYPES
  */
 UserHome.propTypes = {
-  email: PropTypes.string
+  name: PropTypes.string
 }

@@ -12,8 +12,8 @@ class Portfolio extends React.Component {
       this.props.portfolio.length &&
       this.props.portfolio.map(stock => {
         return (
-          <div key={stock.ticker}>
-            {stock.ticker} - {stock.price / 1000} - {stock.shares}
+          <div key={stock.id}>
+            {stock.symbol} - {stock.price / 1000} - {stock.shares}
           </div>
         )
       })
