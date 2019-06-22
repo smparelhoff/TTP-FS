@@ -1,9 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {StockLookupForm, StockBuyForm} from './index'
-import {postStock} from '../store/portfolio'
+import {postStock} from '../store/trades'
 import {postBalance} from '../store/user'
 import {removeStock} from '../store/stock'
+import {getPortfolio} from '../store/portfolio'
 
 class StockAdder extends React.Component {
   constructor() {
@@ -35,6 +36,7 @@ class StockAdder extends React.Component {
         return this.props.updateBalance(tradeID)
       })
       .then(() => {
+        this.props.loadPortfolio()
         this.props.clearStock()
         this.setState({
           balance: this.props.balance / 100,
@@ -98,6 +100,9 @@ const mapDispatch = dispatch => ({
   updateBalance(tradeID) {
     const balance = dispatch(postBalance(tradeID))
     return balance
+  },
+  loadPortfolio() {
+    dispatch(getPortfolio())
   },
   clearStock() {
     dispatch(removeStock())

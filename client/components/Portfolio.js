@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchPortfolio} from '../store/portfolio'
+import {getPortfolio} from '../store/portfolio'
 
 class Portfolio extends React.Component {
   async componentDidMount() {
@@ -8,15 +8,21 @@ class Portfolio extends React.Component {
   }
 
   render() {
-    return (
-      this.props.portfolio.length &&
-      this.props.portfolio.map(stock => {
-        return (
-          <div key={stock.id}>
-            {stock.symbol} - {(stock.price / 1000).toFixed(3)} - {stock.shares}
-          </div>
-        )
-      })
+    const {portfolio} = this.props
+    return portfolio.length ? (
+      <div>
+        <h3>Portfolio</h3>
+        {portfolio.map(elem => {
+          return (
+            <h6 key={elem.symbol}>
+              SYMBOL: {elem.symbol} SHARES: {elem.shares} LAST PRICE:{' '}
+              {elem.price}
+            </h6>
+          )
+        })}
+      </div>
+    ) : (
+      <div>Uh oh!</div>
     )
   }
 }
@@ -29,7 +35,7 @@ const mapState = state => ({
 const mapDispatch = dispatch => {
   return {
     loadPortfolio() {
-      dispatch(fetchPortfolio())
+      dispatch(getPortfolio())
     }
   }
 }
