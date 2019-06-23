@@ -69,7 +69,7 @@ class StockAdder extends React.Component {
     const {stock} = this.props
     let {balance, shares} = this.state
     return (
-      <div>
+      <div className="container">
         <h4>Current balance: ${balance.toFixed(2)}</h4>
         {!stock.symbol ? (
           <StockLookupForm />

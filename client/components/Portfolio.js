@@ -10,7 +10,7 @@ class Portfolio extends React.Component {
   render() {
     const {portfolio} = this.props
     return portfolio.length ? (
-      <div>
+      <div className="container">
         <h3>Portfolio</h3>
         {portfolio.map(elem => {
           return (

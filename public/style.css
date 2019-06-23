@@ -1,5 +1,24 @@
+/* Google fonts being used:
+font-family: 'Bungee Shade', cursive;
+font-family: 'Quicksand', sans-serif;
+*/
+
+/* Colors:
+#b5dbed - murcury blue
+#d8ff7a - citron
+#ff00f775 - milky pink
+*/
+
+html,
 body {
-  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: #d8ff7a;
+  font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
 }
 
 a {
@@ -10,12 +29,38 @@ label {
   display: block;
 }
 
+#title {
+  font-family: 'Bungee Shade', cursive;
+  font-size: 3em;
+  margin: 0 0 0 0;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
 }
 
+nav div {
+  display: inline-block;
+}
+
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.container {
+  flex: 1;
+  min-width: 350px;
+  background-color: #000000;
+  box-shadow: 1px 2px 5px 1px #b5dbed;
+  color: white;
+  border-radius: 1em;
+  margin: 1em 1em 1em 1em;
 }

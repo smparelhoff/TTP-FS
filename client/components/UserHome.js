@@ -12,8 +12,10 @@ export const UserHome = props => {
   return (
     <div>
       <h3>Welcome, {name}!</h3>
-      <Portfolio />
-      <StockAdder />
+      <div className="flex-container">
+        <Portfolio />
+        <StockAdder />
+      </div>
     </div>
   )
 }
