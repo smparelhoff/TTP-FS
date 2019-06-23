@@ -10,7 +10,7 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
+    <div className="flex-container">
       <form onSubmit={handleSubmit} name={name}>
         {props.name === 'signup' && (
           <div>

@@ -29,6 +29,20 @@ label {
   display: block;
 }
 
+#navbar {
+  display: flex;
+  width: 100%;
+  background-color: #b5dbed;
+  position: fixed;
+  top: 0;
+  height: 100px;
+  box-shadow: 1px 0px 13px 1px #4c7b91;
+  color: #434343;
+  justify-content: space-between;
+  padding-left: calc(100% - (100% - 10px));
+  padding-right: calc(100% - (100% - 10px));
+}
+
 #title {
   font-family: 'Bungee Shade', cursive;
   font-size: 3em;
@@ -49,10 +63,15 @@ form div {
   display: inline-block;
 }
 
+.main {
+  display: flex;
+}
+
 .flex-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 100px 0 0 0;
 }
 
 .container {
@@ -62,5 +81,5 @@ form div {
   box-shadow: 1px 2px 5px 1px #b5dbed;
   color: white;
   border-radius: 1em;
-  margin: 1em 1em 1em 1em;
+  margin: 35px 0 0 0;
 }
