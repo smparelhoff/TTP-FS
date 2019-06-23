@@ -70,7 +70,7 @@ class StockAdder extends React.Component {
     let {balance, shares} = this.state
     return (
       <div className="container">
-        <h4>Current balance: ${balance.toFixed(2)}</h4>
+        <h3>CASH: ${balance.toFixed(2)}</h3>
         {!stock.symbol ? (
           <StockLookupForm />
         ) : (

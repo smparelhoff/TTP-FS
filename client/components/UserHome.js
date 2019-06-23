@@ -7,11 +7,8 @@ import {Portfolio, StockAdder} from './index'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {name} = props
-
   return (
-    <div>
-      <h3>Welcome, {name}!</h3>
+    <div className="main">
       <div className="flex-container">
         <Portfolio />
         <StockAdder />

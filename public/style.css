@@ -29,16 +29,28 @@ label {
   display: block;
 }
 
+.container h3 {
+  font-family: 'Bungee Shade', cursive;
+  font-size: 2em;
+  margin: 20px 0 20px 40px;
+  letter-spacing: 0.5rem;
+}
+
+.main {
+  padding: 1em;
+}
+
 #navbar {
   display: flex;
   width: 100%;
+  z-index: 2;
   background-color: #b5dbed;
   position: fixed;
   top: 0;
-  height: 100px;
   box-shadow: 1px 0px 13px 1px #4c7b91;
   color: #434343;
   justify-content: space-between;
+  padding: 10px;
   padding-left: calc(100% - (100% - 10px));
   padding-right: calc(100% - (100% - 10px));
 }
@@ -63,10 +75,6 @@ form div {
   display: inline-block;
 }
 
-.main {
-  display: flex;
-}
-
 .flex-container {
   display: flex;
   flex-wrap: wrap;
@@ -78,8 +86,29 @@ form div {
   flex: 1;
   min-width: 350px;
   background-color: #000000;
-  box-shadow: 1px 2px 5px 1px #b5dbed;
   color: white;
   border-radius: 1em;
-  margin: 35px 0 0 0;
+  margin: 35px 1em 0 1em;
+  opacity: 0.85;
+  box-shadow: 8px 5px 6px 0px #d37373;
+}
+
+.flex-grid {
+  display: flex;
+  padding: 0 40px 0 0;
+}
+
+.col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+li {
+  list-style: none;
+  line-height: 2em;
+}
+
+hr.headbreak {
+  border-top: 1px solid #b5dbed;
 }
