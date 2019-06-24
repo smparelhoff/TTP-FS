@@ -39,6 +39,32 @@ label {
   line-height: 2em;
 }
 
+input[type='text'] {
+  font-size: 2em;
+  font-family: 'Quicksand', sans-serif;
+  background-color: #434343;
+  color: white;
+  width: 50%;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: 0.3s;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #dddddd;
+}
+
+input[type='text']:hover {
+  background-color: white;
+  color: black;
+}
+
+input[type='text']:focus {
+  background-color: #434343;
+  color: white;
+}
+
 .container h3 {
   font-family: 'Bungee Shade', cursive;
   font-size: 2em;

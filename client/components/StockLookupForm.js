@@ -7,7 +7,8 @@ const StockLookupForm = ({handleSubmit, stock}) => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="Ticker Symbol">Ticker Symbol</label>
+          <label htmlFor="Ticker Symbol">Ticker Symbol Lookup</label>
+          <hr />
           <input name="symbol" type="text" />
         </div>
         {!stock.symbol && <input type="submit" value="Check Price" />}
