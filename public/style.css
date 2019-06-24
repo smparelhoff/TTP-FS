@@ -23,10 +23,20 @@ body {
 
 a {
   text-decoration: none;
+  color: #434343;
+}
+
+a:hover {
+  color: #ff00f775;
+}
+
+a:active {
+  color: #d8ff7a;
 }
 
 label {
   display: block;
+  line-height: 2em;
 }
 
 .container h3 {
@@ -40,6 +50,10 @@ label {
   padding: 1em;
 }
 
+.icon {
+  height: 26px;
+}
+
 #navbar {
   display: flex;
   width: 100%;
@@ -48,11 +62,30 @@ label {
   position: fixed;
   top: 0;
   box-shadow: 1px 0px 13px 1px #4c7b91;
-  color: #434343;
   justify-content: space-between;
   padding: 10px;
   padding-left: calc(100% - (100% - 10px));
   padding-right: calc(100% - (100% - 10px));
+}
+
+.footer {
+  display: flex;
+  width: 100%;
+  background-color: #b5dbed;
+  bottom: 0;
+  box-shadow: 1px 0px 13px 1px #4c7b91;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  padding-left: calc(100% - (100% - 10px));
+  padding-right: calc(100% - (100% - 10px));
+  position: fixed;
+  font-size: 14px;
+}
+
+.footer div,
+a {
+  margin: 0 5px 0 5px;
 }
 
 #title {
@@ -79,7 +112,7 @@ form div {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 100px 0 0 0;
+  margin: 100px 0 50px 0;
 }
 
 .container {
