@@ -20,9 +20,10 @@ const StockBuyForm = ({
       <div className="row">
         Buy Shares:
         <input
+          required={true}
           type="number"
           name="shares"
-          min="0"
+          min="1"
           value={shares}
           onChange={handleChange}
         />

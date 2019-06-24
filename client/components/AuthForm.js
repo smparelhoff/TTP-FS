@@ -10,10 +10,10 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div className="flex-container">
-      <form onSubmit={handleSubmit} name={name}>
+    <div className="login-flex-container">
+      <form className="login-container" onSubmit={handleSubmit} name={name}>
         {props.name === 'signup' && (
-          <div>
+          <div className="row">
             <label htmlFor="First Name">
               <small>First Name</small>
             </label>
@@ -21,31 +21,30 @@ const AuthForm = props => {
           </div>
         )}
         {props.name === 'signup' && (
-          <div>
+          <div className="row">
             <label htmlFor="Last Name">
               <small>Last Name</small>
             </label>
             <input name="lastname" type="text" />
           </div>
         )}
-        <div>
+        <div className="row">
           <label htmlFor="email">
             <small>Email</small>
           </label>
           <input name="email" type="text" />
         </div>
-        <div>
+        <div className="row">
           <label htmlFor="password">
             <small>Password</small>
           </label>
           <input name="password" type="password" />
         </div>
-        <div>
-          <button type="submit">{displayName}</button>
+        <div className="row">
+          <input type="submit" value={displayName} />
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
     </div>
   )
 }
@@ -80,7 +79,9 @@ const mapDispatch = dispatch => {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      const firstname = evt.target.firstname ? evt.target.firstname.value : ''
+      const lastname = evt.target.lastname ? evt.target.lastname.value : ''
+      dispatch(auth(email, password, firstname, lastname, formName))
     }
   }
 }

@@ -12,6 +12,7 @@ class Portfolio extends React.Component {
 
   render() {
     const {portfolio} = this.props
+    console.log(portfolio)
     return portfolio.length ? (
       <div className="container">
         <h3>Portfolio</h3>
@@ -41,9 +42,12 @@ class Portfolio extends React.Component {
                   elem.open < elem.lastPrice
                     ? 'green'
                     : elem.open === elem.lastPrice ? 'gray' : 'red'
+                const vkey =
+                  color === 'green' ? '+' : color === 'red' ? '-' : ''
                 return (
                   <li className={color} key={elem.symbol + elem.lastPrice}>
-                    {elem.lastPrice}
+                    ${elem.lastPrice}
+                    {vkey}
                   </li>
                 )
               })}

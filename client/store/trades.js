@@ -19,9 +19,13 @@ export const fetchTransactions = () => async dispatch => {
 }
 
 export const postStock = stock => async dispatch => {
-  const {data} = await axios.post('/api/portfolio', stock)
-  dispatch(addStock(data))
-  return data.id
+  try {
+    const {data} = await axios.post('/api/portfolio', stock)
+    dispatch(addStock(data))
+    return data.id
+  } catch (error) {
+    console.log("Data couldn't be posted")
+  }
 }
 
 //Initial State
