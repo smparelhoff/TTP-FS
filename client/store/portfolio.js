@@ -17,21 +17,26 @@ export const getPortfolio = () => async dispatch => {
     return accum
   }, {})
 
-  const symbols = Object.keys(portfolioRaw).join(',')
-  console.log(`https://api.iextrading.com/1.0/tops/last?symbols=${symbols}`)
-  const lastPrices = await axios.get(
-    `https://api.iextrading.com/1.0/tops/last?symbols=${symbols}`
-  )
+  const symbols = Object.keys(portfolioRaw)
 
-  //const officialPrices = await axios.get(`https://api.iextrading.com/1.0/deep/official-price?symbols=${symbols}`)
-  console.log({portfolioRaw, symbols, lastPrices: lastPrices.data})
-
-  const portfolio = lastPrices.data.map(elem => {
-    const shares = portfolioRaw[elem.symbol]
-    return {...elem, shares}
+  const deepInfo = symbols.map(async symbol => {
+    const deep = await axios.get(
+      `https://api.iextrading.com/1.0/deep?symbols=${symbol}`
+    )
+    return {
+      symbol: deep.data.symbol,
+      lastPrice: deep.data.lastSalePrice,
+      open: deep.data.trades[deep.data.trades.length - 1].price
+    }
   })
 
-  dispatch(loadPortfolio(portfolio))
+  Promise.all(deepInfo).then(deep => {
+    const portfolio = deep.map(elem => {
+      const shares = portfolioRaw[elem.symbol]
+      return {...elem, shares}
+    })
+    dispatch(loadPortfolio(portfolio))
+  })
 }
 
 //Reducer

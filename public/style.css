@@ -181,6 +181,7 @@ form div {
 .flex-grid {
   display: flex;
   padding: 0 40px 0 0;
+  min-height: 100%;
 }
 
 .col {
@@ -214,4 +215,35 @@ li {
 
 hr.headbreak {
   border-top: 1px solid #b5dbed;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: greenyellow;
+}
+
+.gray {
+  color: gray;
+}
+
+.spinner {
+  margin: 50px;
+  height: 28px;
+  width: 28px;
+  animation: rotate 0.8s infinite linear;
+  border: 8px solid #fff;
+  border-right-color: transparent;
+  border-radius: 50%;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

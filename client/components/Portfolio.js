@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getPortfolio} from '../store/portfolio'
+import {Loading} from './index'
 
 class Portfolio extends React.Component {
   async componentDidMount() {
@@ -35,15 +36,23 @@ class Portfolio extends React.Component {
             <ul>
               <li>LAST</li>
               <hr />
-              {portfolio.map(elem => (
-                <li key={elem.symbol + elem.price}>{elem.price}</li>
-              ))}
+              {portfolio.map(elem => {
+                const color =
+                  elem.open < elem.lastPrice
+                    ? 'green'
+                    : elem.open === elem.lastPrice ? 'gray' : 'red'
+                return (
+                  <li className={color} key={elem.symbol + elem.lastPrice}>
+                    {elem.lastPrice}
+                  </li>
+                )
+              })}
             </ul>
           </div>
         </div>
       </div>
     ) : (
-      <div>Uh oh!</div>
+      <Loading />
     )
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {checkStock} from '../store/stock'
+import {Loading} from './index'
 
 const StockLookupForm = ({handleSubmit, stock}) => {
   return (
@@ -10,13 +11,6 @@ const StockLookupForm = ({handleSubmit, stock}) => {
         <input required={true} name="symbol" type="text" />
         {!stock.symbol && <input type="submit" value="Check Price" />}
       </div>
-      {/* {stock.symbol && (
-          <div className="row">
-          <label htmlFor="Shares">Shares</label>
-          <input name="shares" type="number" />
-          <input type="submit" value="Add To Portfolio" />
-          </div>
-      )} */}
     </form>
   )
 }
