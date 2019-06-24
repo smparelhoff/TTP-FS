@@ -66,7 +66,7 @@ class StockAdder extends React.Component {
   }
 
   render() {
-    const {stock} = this.props
+    const {stock, clearStock} = this.props
     let {balance, shares} = this.state
     return (
       <div className="container">
@@ -80,6 +80,7 @@ class StockAdder extends React.Component {
             handleChange={this.handleChange}
             error={this.state.error}
             handleBuy={this.handleBuy}
+            clearStock={clearStock}
           />
         )}
       </div>

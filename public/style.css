@@ -7,6 +7,7 @@ font-family: 'Quicksand', sans-serif;
 #b5dbed - murcury blue
 #d8ff7a - citron
 #ff00f775 - milky pink
+#d37373 - carmine red
 */
 
 html,
@@ -35,24 +36,25 @@ a:active {
 }
 
 label {
-  display: block;
-  line-height: 2em;
+  flex: 1;
+  font-size: 16px;
+  min-width: 165px;
 }
 
-input[type='text'] {
-  font-size: 2em;
+input {
+  flex: 1 0 30%;
+  font-size: 16px;
   font-family: 'Quicksand', sans-serif;
   background-color: #434343;
   color: white;
-  width: 50%;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: 0.3s;
-  padding: 3px 0px 3px 3px;
-  margin: 5px 1px 3px 0px;
   border: 1px solid #dddddd;
+  padding: 5px 0px 5px 5px;
+  margin: 5px 5px 3px 5px;
 }
 
 input[type='text']:hover {
@@ -61,8 +63,32 @@ input[type='text']:hover {
 }
 
 input[type='text']:focus {
+  font-family: 'Quicksand', sans-serif;
   background-color: #434343;
   color: white;
+}
+
+input[type='button'] {
+  border-radius: 1em;
+  padding: 5px 11px;
+  background-color: #d37373;
+  border: 2px solid white;
+  box-shadow: 4px 2px 8px 2px #2c2b2b;
+}
+
+input[type='button']:hover {
+  background-color: #b5dbed;
+  color: black;
+}
+
+input[type='submit']:hover {
+  background-color: #b5dbed;
+  color: black;
+}
+
+.main-form {
+  width: 90%;
+  margin: 0;
 }
 
 .container h3 {
@@ -161,6 +187,24 @@ form div {
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  flex: 1;
+}
+
+.stock-quote {
+  background-color: #434343;
+  margin: 1em 1em;
+  padding: 1em 1em;
+  border-radius: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  flex: 1;
 }
 
 li {

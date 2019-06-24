@@ -4,23 +4,20 @@ import {checkStock} from '../store/stock'
 
 const StockLookupForm = ({handleSubmit, stock}) => {
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="Ticker Symbol">Ticker Symbol Lookup</label>
-          <hr />
-          <input name="symbol" type="text" />
-        </div>
+    <form className="flex-grid" onSubmit={handleSubmit}>
+      <div className="row">
+        <label htmlFor="Ticker Symbol">Ticker Symbol Lookup</label>
+        <input required={true} name="symbol" type="text" />
         {!stock.symbol && <input type="submit" value="Check Price" />}
-        {stock.symbol && (
-          <div>
-            <label htmlFor="Shares">Shares</label>
-            <input name="shares" type="number" />
-            <input type="submit" value="Add To Portfolio" />
+      </div>
+      {/* {stock.symbol && (
+          <div className="row">
+          <label htmlFor="Shares">Shares</label>
+          <input name="shares" type="number" />
+          <input type="submit" value="Add To Portfolio" />
           </div>
-        )}
-      </form>
-    </div>
+      )} */}
+    </form>
   )
 }
 
