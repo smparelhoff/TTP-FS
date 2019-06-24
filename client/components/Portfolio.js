@@ -1,28 +1,62 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getPortfolio} from '../store/portfolio'
+import {Loading} from './index'
 
 class Portfolio extends React.Component {
   async componentDidMount() {
     await this.props.loadPortfolio()
   }
 
+  //portfolio = {symbol, shares, price}
+
   render() {
     const {portfolio} = this.props
+    console.log(portfolio)
     return portfolio.length ? (
-      <div>
+      <div className="container">
         <h3>Portfolio</h3>
-        {portfolio.map(elem => {
-          return (
-            <h6 key={elem.symbol}>
-              SYMBOL: {elem.symbol} SHARES: {elem.shares} LAST PRICE:{' '}
-              {elem.price}
-            </h6>
-          )
-        })}
+        <div className="flex-grid">
+          <div className="col">
+            <ul>
+              <li>SYMBOL</li>
+              <hr />
+              {portfolio.map(elem => <li key={elem.symbol}>{elem.symbol}</li>)}
+            </ul>
+          </div>
+          <div className="col">
+            <ul>
+              <li>SHARES</li>
+              <hr />
+              {portfolio.map(elem => (
+                <li key={elem.symbol + elem.shares}>{elem.shares}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="col">
+            <ul>
+              <li>LAST</li>
+              <hr />
+              {portfolio.map(elem => {
+                const color =
+                  elem.open < elem.lastPrice
+                    ? 'green'
+                    : elem.open === elem.lastPrice ? 'gray' : 'red'
+                const vkey =
+                  color === 'green' ? '+' : color === 'red' ? '-' : ''
+                return (
+                  <li className={color} key={elem.symbol + elem.lastPrice}>
+                    ${elem.lastPrice}
+                    {vkey}
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        </div>
       </div>
     ) : (
-      <div>Uh oh!</div>
+      <Loading />
     )
   }
 }

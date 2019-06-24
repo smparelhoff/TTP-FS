@@ -8,30 +8,50 @@ const loadPortfolio = portfolio => ({type: LOAD_PORTFOLIO, portfolio})
 
 //Thunk Creators
 export const getPortfolio = () => async dispatch => {
-  const {data} = await axios.get('/api/portfolio')
+  let res
+  try {
+    res = await axios.get('/api/portfolio')
+    if (!res.data.length) {
+      dispatch(
+        loadPortfolio([{symbol: '-', shares: '-', lastPrice: '-', open: '-'}])
+      )
+      return
+    }
+  } catch (err) {
+    console.error(err)
+  }
 
-  const portfolioRaw = data.reduce((accum, elem) => {
-    if (accum[elem.symbol]) {
-      accum[elem.symbol] += elem.shares
-    } else accum[elem.symbol] = elem.shares
-    return accum
-  }, {})
+  try {
+    const portfolioRaw = res.data.reduce((accum, elem) => {
+      if (accum[elem.symbol]) {
+        accum[elem.symbol] += elem.shares
+      } else accum[elem.symbol] = elem.shares
+      return accum
+    }, {})
 
-  const symbols = Object.keys(portfolioRaw).join(',')
-  console.log(`https://api.iextrading.com/1.0/tops/last?symbols=${symbols}`)
-  const lastPrices = await axios.get(
-    `https://api.iextrading.com/1.0/tops/last?symbols=${symbols}`
-  )
+    const symbols = Object.keys(portfolioRaw)
 
-  //const officialPrices = await axios.get(`https://api.iextrading.com/1.0/deep/official-price?symbols=${symbols}`)
-  console.log({portfolioRaw, symbols, lastPrices: lastPrices.data})
+    const deepInfo = symbols.map(async symbol => {
+      const deep = await axios.get(
+        `https://api.iextrading.com/1.0/deep?symbols=${symbol}`
+      )
+      return {
+        symbol: deep.data.symbol,
+        lastPrice: deep.data.lastSalePrice,
+        open: deep.data.trades[deep.data.trades.length - 1].price
+      }
+    })
 
-  const portfolio = lastPrices.data.map(elem => {
-    const shares = portfolioRaw[elem.symbol]
-    return {...elem, shares}
-  })
-
-  dispatch(loadPortfolio(portfolio))
+    Promise.all(deepInfo).then(deep => {
+      const portfolio = deep.map(elem => {
+        const shares = portfolioRaw[elem.symbol]
+        return {...elem, shares}
+      })
+      dispatch(loadPortfolio(portfolio))
+    })
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 //Reducer
