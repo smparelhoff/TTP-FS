@@ -24,7 +24,6 @@ const updateBalance = balance => ({type: UPDATE_BALANCE, balance})
  * THUNK CREATORS
  */
 
-//TD rethink this thunk--should be the amount to subtract from user's balance
 export const postBalance = tradeId => async dispatch => {
   try {
     const {data} = await axios.put('/api/user', {tradeId})
