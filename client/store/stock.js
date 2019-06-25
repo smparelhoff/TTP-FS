@@ -10,10 +10,17 @@ export const removeStock = () => ({type: REMOVE_STOCK})
 
 //Thunks
 export const checkStock = symbol => async dispatch => {
-  const {data} = await axios.get(
-    `https://api.iextrading.com/1.0/tops/last?symbols=${symbol}`
-  )
-  dispatch(getStock(data[0]))
+  try {
+    const {data} = await axios.get(
+      `https://api.iextrading.com/1.0/tops/last?symbols=${symbol}`
+    )
+    if (!data.length) {
+      const err = new Error('Symbol not found.')
+      dispatch(getStock({error: err}))
+    } else dispatch(getStock(data[0]))
+  } catch (err) {
+    dispatch(getStock({error: err}))
+  }
 }
 
 const initialState = {}

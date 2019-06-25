@@ -72,7 +72,7 @@ class StockAdder extends React.Component {
       <div className="container">
         <h3>CASH: ${balance.toFixed(2)}</h3>
         {!stock.symbol ? (
-          <StockLookupForm />
+          <StockLookupForm clearStock={clearStock} />
         ) : (
           <StockBuyForm
             stock={stock}

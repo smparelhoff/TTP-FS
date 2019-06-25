@@ -17,7 +17,7 @@ const StockBuyForm = ({
           <input type="button" value="X" onClick={clearStock} />
         </div>
       </div>
-      <div className="row">
+      <div className="stock-quote">
         Buy Shares:
         <input
           required={true}

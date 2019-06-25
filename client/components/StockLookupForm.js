@@ -1,15 +1,19 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {checkStock} from '../store/stock'
-import {Loading} from './index'
 
-const StockLookupForm = ({handleSubmit, stock}) => {
+const StockLookupForm = ({handleSubmit, stock, clearStock}) => {
   return (
     <form className="flex-grid" onSubmit={handleSubmit}>
       <div className="row">
         <label htmlFor="Ticker Symbol">Ticker Symbol Lookup</label>
         <input required={true} name="symbol" type="text" />
-        {!stock.symbol && <input type="submit" value="Check Price" />}
+        <input type="submit" value="Check Price" />
+        {stock.error && (
+          <div className="error" onClick={clearStock}>
+            {stock.error.message}
+          </div>
+        )}
       </div>
     </form>
   )

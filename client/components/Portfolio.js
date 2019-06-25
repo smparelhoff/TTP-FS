@@ -15,7 +15,16 @@ class Portfolio extends React.Component {
     console.log(portfolio)
     return portfolio.length ? (
       <div className="container">
-        <h3>Portfolio</h3>
+        <h3>
+          Portfolio: ${portfolio[0].symbol !== '-'
+            ? portfolio
+                .reduce((accum, elem) => {
+                  accum += elem.lastPrice * elem.shares
+                  return accum
+                }, 0)
+                .toFixed(2)
+            : 0}
+        </h3>
         <div className="flex-grid">
           <div className="col">
             <ul>
