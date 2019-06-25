@@ -4,6 +4,7 @@ const StockBuyForm = ({
   stock,
   shares,
   error,
+  errorMessage,
   handleBuy,
   handleChange,
   clearStock
@@ -23,11 +24,11 @@ const StockBuyForm = ({
           required={true}
           type="number"
           name="shares"
-          min="1"
+          min="0"
           value={shares}
           onChange={handleChange}
         />
-        {error && <div>Sorry, you can't afford any more!</div>}
+        {error && <div className="error">{errorMessage}</div>}
         <input type="submit" value="Buy" onClick={handleBuy} />
       </div>
     </div>
