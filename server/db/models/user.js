@@ -54,10 +54,10 @@ User.generateSalt = function() {
 
 User.encryptPassword = function(plainText, salt) {
   return crypto
-    .createHash('RSA-SHA256')
-    .update(plainText)
+    .createHash('RSA-SHA256') //Creates and returns a Hash object that can generate hash digests with the passed in algorithm
+    .update(plainText) //Updates the hash content with the given data, default encoding is utf8
     .update(salt)
-    .digest('hex')
+    .digest('hex') // Calculates the digest of all the data to be hashed with the provided encoding
 }
 
 /**
