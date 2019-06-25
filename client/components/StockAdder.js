@@ -12,7 +12,8 @@ class StockAdder extends React.Component {
     this.state = {
       balance: 0,
       shares: 0,
-      error: false
+      error: false,
+      errorMessage: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleBuy = this.handleBuy.bind(this)
@@ -30,23 +31,27 @@ class StockAdder extends React.Component {
       shares: this.state.shares
     }
 
-    this.props
-      .addStock(postData)
-      .then(tradeID => {
-        return this.props.updateBalance(tradeID)
-      })
-      .then(() => {
-        this.props.loadPortfolio()
-        this.props.clearStock()
-        this.setState({
-          balance: this.props.balance / 100,
-          shares: 0,
-          error: false
+    if (this.state.shares < 1) {
+      this.setState({error: true, errorMessage: 'Must select at least 1 share'})
+    } else {
+      this.props
+        .addStock(postData)
+        .then(tradeID => {
+          return this.props.updateBalance(tradeID)
         })
-      })
-      .catch(err => {
-        console.error(err)
-      })
+        .then(() => {
+          this.props.loadPortfolio()
+          this.props.clearStock()
+          this.setState({
+            balance: this.props.balance / 100,
+            shares: 0,
+            error: false
+          })
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }
   }
 
   handleChange(evt) {
@@ -55,7 +60,12 @@ class StockAdder extends React.Component {
     const newBalance = balance / 100 - price
 
     if (newBalance < 0) {
-      this.setState({error: true})
+      this.setState({
+        error: true,
+        errorMessage: "Sorry, you can't afford any more!"
+      })
+    } else if (evt.target.value < 0) {
+      this.setState({error: true, errorMessage: 'Invalid share entry'})
     } else {
       this.setState({
         balance: newBalance,
@@ -72,13 +82,14 @@ class StockAdder extends React.Component {
       <div className="container">
         <h3>CASH: ${balance.toFixed(2)}</h3>
         {!stock.symbol ? (
-          <StockLookupForm />
+          <StockLookupForm clearStock={clearStock} />
         ) : (
           <StockBuyForm
             stock={stock}
             shares={shares}
             handleChange={this.handleChange}
             error={this.state.error}
+            errorMessage={this.state.errorMessage}
             handleBuy={this.handleBuy}
             clearStock={clearStock}
           />
